@@ -9,5 +9,6 @@ const Colors = {
   secondaryTextColor: "#757575",
   dividerColor: "#BDBDBD",
   whiteText: "#FFFFFF",
+  backgroundColor: '#EFF1F5',
 };
 export default Colors;

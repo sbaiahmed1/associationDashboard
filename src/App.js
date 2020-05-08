@@ -1,17 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Login from "./views/login/login";
+import Colors from "./config/colors";
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route path="/about"></Route>
-        <Route path="/users"></Route>
-        <Route exact path="/" component={Login}></Route>
-      </Switch>
-    </Router>
-  );
+    return (
+        <Router>
+            <Switch>
+                <Route path="/about"/>
+                <Route path="/users"/>
+                <Route exact path="/" component={Login}/>
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;
