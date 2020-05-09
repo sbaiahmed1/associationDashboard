@@ -17,9 +17,13 @@ let loginStyle = {
         borderRadius: 6,
         minWidth: '60%',
         maxWidth: '65%',
-
-
     },
-    inputStyle: {}
+    inputStyle: {},
+    buttonStyle: {
+        border: 0,
+        borderRadius: 6,
+        margin: '1%',
+        backgroundColor: Colors.lightButtonColor
+    }
 };
 export default loginStyle;

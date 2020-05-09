@@ -10,5 +10,7 @@ const Colors = {
   dividerColor: "#BDBDBD",
   whiteText: "#FFFFFF",
   backgroundColor: '#EFF1F5',
+  lightButtonColor: '#BBDEFB',
+  buttonColor: '#03A9F4',
 };
 export default Colors;
