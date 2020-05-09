@@ -1,7 +1,6 @@
 import React from "react";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Login from "./views/login/login";
-import Colors from "./config/colors";
 
 function App() {
     return (
