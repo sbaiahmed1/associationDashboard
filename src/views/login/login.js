@@ -32,11 +32,12 @@ class Login extends Component {
             this.setState({validated: true})
         }
     };
+
     warning(message) {
         Modal.error({
             title: 'Error',
             content: message,
-            style:{borderRadius:32}
+            style: {borderRadius: 32}
         });
     }
 
@@ -75,11 +76,11 @@ class Login extends Component {
                 this.storeToken(this.state.token)
             })
             .catch(error => {
-                console.log(JSON.stringify(error));
-                if (error) {
-
+                console.log(error.response);
+                if (error.code === 401) {
+                    console.log('auth error')
                 }
-                this.warning(error.message)
+                this.warning(error.response.data);
                 this.setState({isLoading: false});
             });
     }
@@ -127,7 +128,7 @@ class Login extends Component {
                                     name="password"
                                     rules={[{required: true, message: 'Please input your password!'}]}
                                 >
-                                    <Input.Password onBlur={()=>this.validateCreds()} onChange={(e) => {
+                                    <Input.Password onBlur={() => this.validateCreds()} onChange={(e) => {
                                         this.setState({password: e.target.value})
                                     }}/>
                                 </Form.Item>
