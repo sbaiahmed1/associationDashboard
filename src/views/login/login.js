@@ -73,8 +73,13 @@ class Login extends Component {
                         userName: response.data.userData.username,
                     }
                 });
-                this.storeToken(this.state.token)
+                this.storeToken(this.state.token);
+                this.setState({isLoading: false})
             })
+            .then(() => {
+                    this.props.history.push('/dashboard')
+                }
+            )
             .catch(error => {
                 console.log(error.response);
                 if (error.code === 401) {
