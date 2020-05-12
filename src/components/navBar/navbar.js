@@ -1,52 +1,83 @@
-import React, {Component} from "react";
-import {Menu} from 'antd';
-import {MailOutlined, AppstoreOutlined, SettingOutlined} from '@ant-design/icons';
+import React, { Component } from "react";
+import { Menu } from "antd";
+import {
+  MailOutlined,
+  AppstoreOutlined,
+  MenuOutlined,
+} from "@ant-design/icons";
+import Colors from "../../config/colors";
+import logo from "../../assets/noTextLogo.png";
+import { Link } from "react-router-dom";
 
-const {SubMenu} = Menu;
+class Navbar extends Component {
+  state = {
+    current: "mail",
+  };
 
-class Navbar extends React.Component {
-    state = {
-        current: 'mail',
-    };
+  handleClick = (e) => {
+    console.log("click ", e);
+    this.setState({
+      current: e.key,
+    });
+  };
 
-    handleClick = e => {
-        console.log('click ', e);
-        this.setState({
-            current: e.key,
-        });
-    };
+  render() {
+    return (
+      <Menu
+        onClick={this.handleClick}
+        selectedKeys={[this.state.current]}
+        mode="horizontal"
+      >
+        <Menu.Item
+          key="drawerButton"
+          icon={
+            <MenuOutlined
+              style={{
+                color: Colors.buttonColor,
+                padding: "1%",
+              }}
+              onClick={this.props.onPressDrawer}
+            >
+              Primary
+            </MenuOutlined>
+          }
+        />
 
-    render() {
-        return (
-            <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
-                <Menu.Item key="home"
-                           icon={<img style={{height: 50, width: 50}} src={'https://picsum.photos/536/354'}/>}
-                >
-                </Menu.Item>
-                <Menu.Item key="mail" icon={<MailOutlined/>}>
-                    Navigation One
-                </Menu.Item>
-                <Menu.Item key="app"  icon={<AppstoreOutlined/>}>
-                    Navigation Two
-                </Menu.Item>
-                <SubMenu icon={<SettingOutlined/>} title="Navigation Three - Submenu">
-                    <Menu.ItemGroup title="Item 1">
-                        <Menu.Item key="setting:1">Option 1</Menu.Item>
-                        <Menu.Item key="setting:2">Option 2</Menu.Item>
-                    </Menu.ItemGroup>
-                    <Menu.ItemGroup title="Item 2">
-                        <Menu.Item key="setting:3">Option 3</Menu.Item>
-                        <Menu.Item key="setting:4">Option 4</Menu.Item>
-                    </Menu.ItemGroup>
-                </SubMenu>
-                <Menu.Item key="alipay">
-                    <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-                        Navigation Four - Link
-                    </a>
-                </Menu.Item>
-            </Menu>
-        );
-    }
+        <Menu.Item
+          key="home"
+          icon={
+            <Link to={"/"}>
+              <img alt={"Logo"} style={{ height: 40, width: 50 }} src={logo} />
+            </Link>
+          }
+        />
+
+        <Menu.Item
+          style={{ float: "right" }}
+          key="mail"
+          icon={<MailOutlined />}
+        >
+          Navigation One
+        </Menu.Item>
+        <Menu.Item
+          style={{ float: "right" }}
+          key="app"
+          icon={<AppstoreOutlined />}
+        >
+          Navigation Two
+        </Menu.Item>
+        <Menu.Item style={{ float: "right" }} key="alipay">
+          <a
+            href="https://ant.design"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Navigation Four - Link
+          </a>
+        </Menu.Item>
+      </Menu>
+    );
+  }
 }
 
-export default Navbar
+export default Navbar;

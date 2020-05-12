@@ -4,6 +4,8 @@ import {Form, Input, Button, Checkbox, Spin, Modal} from 'antd';
 import axios from 'axios'
 import Colors from "../../config/colors";
 import {baseUrl} from "../../config/constants";
+import { connect } from "react-redux";
+import { loggedIn } from "../../redux/actions/login";
 
 class Login extends Component {
     /******************************States**********************************/
@@ -78,6 +80,7 @@ class Login extends Component {
             })
             .then(() => {
                     this.props.history.push('/dashboard')
+                    this.props.isLogged(this.state.data)
                 }
             )
             .catch(error => {
@@ -89,20 +92,7 @@ class Login extends Component {
                 this.setState({isLoading: false});
             });
     }
-    ;
-
-    /*************************Effects*********************************************/
-//     useEffect(
-//
-// () => {
-//     validateCreds();
-// }
-//
-// ,
-// [email, password];
-// )
-
-    /*************************End Effects************************************************/
+    
     render() {
 
 
@@ -157,5 +147,11 @@ class Login extends Component {
         );
     }
 }
-
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+    return {
+      isLogged: (global) => {
+        dispatch(loggedIn(global));
+      },
+    };
+  };
+  export default connect(null, mapDispatchToProps)(Login);
