@@ -1,12 +1,12 @@
 const init = {
-  imageUri: '',
+  number: null,
 };
 
 const AvatarReducer = (state = init, action) => {
   switch (action.type) {
-    case 'IMAGE_URI':
+    case 'NUMBER':
       return {
-        imageUri: action.payload.uri,
+        number: action.payload.number,
       };
     default:
       return state;

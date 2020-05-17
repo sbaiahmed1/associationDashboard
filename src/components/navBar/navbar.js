@@ -30,13 +30,13 @@ class Navbar extends Component {
       >
         <Menu.Item
           key="drawerButton"
+          onClick={this.props.onPressDrawer}
           icon={
             <MenuOutlined
               style={{
                 color: Colors.buttonColor,
                 padding: "1%",
               }}
-              onClick={this.props.onPressDrawer}
             >
               Primary
             </MenuOutlined>

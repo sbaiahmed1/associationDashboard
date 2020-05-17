@@ -1,11 +1,11 @@
 import {createStore} from 'redux';
 import rootReducer from '../reducers/rootReducer';
-import {persistStore, persistReducer, createTransform} from 'redux-persist';
+import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import createEncryptor from "redux-persist-transform-encrypt"
 
 const encryptor = createEncryptor({
-  secretKey: "my-super-secret-key",
+  secretKey: "secret",
   onError(error) {
     // Handle the error.
     console.log(error)
