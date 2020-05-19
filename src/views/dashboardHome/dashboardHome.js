@@ -17,6 +17,8 @@ class DashboardHome extends Component {
     taskModalVisible: false,
     taskModalContent: {},
     eventModalContent: {},
+    date: '',
+    time:''
   };
   getDate(date) {
     date = new Date(date * 1000);
@@ -25,9 +27,9 @@ class DashboardHome extends Component {
     var day = date.getDate();
     var hours = date.getHours();
     var minutes = "0" + date.getMinutes();
-    var realDate =
-      month + "-" + day + "-" + year + " " + hours + ":" + minutes.substr(-2);
-    return realDate;
+    var realDate = month + "-" + day + "-" + year;
+    var realTime = hours + ":" + minutes.substr(-2);
+    return [realTime, realDate];
   }
   onOpen = () => {
     this.setState({
@@ -58,18 +60,25 @@ class DashboardHome extends Component {
     return (
       <div style={dashboardHomeStyle.container}>
         <EventModal
-          onChangeDate={(date) => {
+          onChangeHours={(time) => {
             this.setState({
-              eventModalContent: {
-                ...this.state.eventModalContent,
-                date: date,
-              },
+                time: time._i,
             });
           }}
           content={this.state.eventModalContent}
-          onChange={(str) => {
+          onChangeName={(str) => {
             this.setState({
               eventModalContent: { ...this.state.eventModalContent, name: str },
+            });
+          }}
+          onChangeDescription={(str) => {
+            this.setState({
+              eventModalContent: { ...this.state.eventModalContent, description: str },
+            });
+          }}
+          onChangeLocation={(str) => {
+            this.setState({
+              eventModalContent: { ...this.state.eventModalContent, location: str },
             });
           }}
           visible={this.state.eventModalVisible}
@@ -91,9 +100,15 @@ class DashboardHome extends Component {
             xxl: 3,
           }}
           header={
-            <h1 style={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
-              Recently added Tasks
-            </h1>
+            <div>
+              <Row style={{ justifyContent: 'space-between' }}>
+                <h2 style={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
+                  Recently added events
+            </h2>
+                <h4 style={{ fontFamily: "Montserrat", fontWeight: "500", paddingTop: 10 }}>See all events</h4>
+              </Row>
+
+            </div>
           }
           footer={<div>Footer</div>}
           bordered
@@ -108,7 +123,7 @@ class DashboardHome extends Component {
                     item.name,
                     item.description,
                     item.location,
-                    item.date
+                    this.getDate(item.date)
                   )
                 }
                 name={item.name}

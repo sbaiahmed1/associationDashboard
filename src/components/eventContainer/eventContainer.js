@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import eventContainerStyle from "./eventContainerStyle";
-import { Card, Row } from "antd";
+import { Card, Row ,TimePicker} from "antd";
 
 function setLinesNumber(text) {
   var final = text.substr(0, 70);
@@ -11,7 +11,7 @@ function getDate(date) {
   var year = date.getFullYear();
   var month = date.getMonth();
   var day = date.getDate();
-  
+
   var realDate =
     month + '-' + day + '-' + year + ' ';
   return realDate;
@@ -25,10 +25,10 @@ function EventContainer(props) {
       style={{ width: "100%", borderTopLeftRadius: 6, borderTopRightRadius: 6 }}
       cover={<img alt="example" src={props.image} />}
     >
-      <h1 style={eventContainerStyle.name}>{props.name}</h1>
-      <h3 style={eventContainerStyle.description}>
+      <h3 style={eventContainerStyle.name}>{props.name}</h3>
+      <h4 style={eventContainerStyle.description}>
         {setLinesNumber(props.description)}
-      </h3>
+      </h4>
       <Row style={{ justifyContent: "space-between" }}>
         <h6 style={eventContainerStyle.location}>{props.location}</h6>
         <h6 style={eventContainerStyle.date}>{getDate(props.date)}</h6>
