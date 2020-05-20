@@ -46,5 +46,34 @@ const Events = [
         __v: 0,
       }
   ];
+const Tasks = [
+    {
+        _id: '5assadga57asdgh6asdhas6',
+        title: 'Do Do Yoo',
+        content:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu dictum varius duis at consectetur lorem. Diam quis enim lobortis scelerisque fermentum dui faucibus in ornare. Adipiscing elit ut aliquam purus. Donec ac odio tempor orci dapibus. Maecenas ultricies mi eget mauris pharetra et ultrices neque.',
+        createdAt: '2020-04-06T22:53:45.593Z',
+        updatedAt: '2020-04-12T20:56:27.431Z',
+        __v: 0,
+    },
+    {
+        _id: '5e8fa3b11cc731392ccdd45545',
+        title: 'Im an event',
+        content:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu dictum varius duis at consectetur lorem. Diam quis enim lobortis scelerisque fermentum dui faucibus in ornare. Adipiscing elit ut aliquam purus. Donec ac odio tempor orci dapibus. Maecenas ultricies mi eget mauris pharetra et ultrices neque.',
+        createdAt: '2020-04-09T22:37:37.131Z',
+        updatedAt: '2020-04-09T22:37:37.131Z',
+        __v: 0,
+    },
+    {
+        _id: '5e8fa3b11cc7313sh56as329',
+        title: 'Im an event',
+        content:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu dictum varius duis at consectetur lorem. Diam quis enim lobortis scelerisque fermentum dui faucibus in ornare. Adipiscing elit ut aliquam purus. Donec ac odio tempor orci dapibus. Maecenas ultricies mi eget mauris pharetra et ultrices neque.',
+        createdAt: '2020-04-09T22:37:37.131Z',
+        updatedAt: '2020-04-09T22:37:37.131Z',
+        __v: 0,
+    },
+];
 
-  export {baseUrl,Events};
+  export {baseUrl,Events,Tasks};
