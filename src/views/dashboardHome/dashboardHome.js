@@ -5,7 +5,7 @@ import dashboardHomeStyle from "./dashboarHomeStyle";
 import Navbar from "../../components/navBar/navbar";
 import {connect} from "react-redux";
 import {loggedIn} from "../../redux/actions/login";
-import {Events, Tasks} from "../../config/constants";
+import {Events, Tasks, Routes} from "../../config/constants";
 import event from "../../assets/event.jpg";
 import EventContainer from "../../components/eventContainer/eventContainer";
 import EventModal from "../../components/eventModal/eventModal";
@@ -130,6 +130,7 @@ class DashboardHome extends Component {
                 <DrawerNav
                     visible={this.state.visible}
                     onClose={() => this.onClose(false)}
+                    content={Routes}
                 />
                 <List
                     grid={{
@@ -193,11 +194,11 @@ class DashboardHome extends Component {
                         <div>
                             <Row style={{justifyContent: 'space-between'}}>
                                 <h2 style={{fontFamily: "Montserrat", fontWeight: "bold"}}>
-                                    Recently added events
+                                    Recently added Tasks
                                 </h2>
                                 <Link to={'/events'}>
                                     <h4 style={{fontFamily: "Montserrat", fontWeight: "500", paddingTop: 10}}>See all
-                                        events</h4>
+                                        tasks</h4>
                                 </Link>
 
                             </Row>

@@ -1,18 +1,22 @@
 import Colors from "../../config/colors";
-import avatar from '../../assets/event.jpg'
+import avatar from '../../assets/avatar.png'
 
 let drawerStyle = {
     header: {
         backgroundImage: `url(${avatar})`,
         maxWidth: '100%',
-        minHeight: '50%',
-        height: 'auto',
+        minHeight: 200,
         backgroundRepeat: 'no-repeat',
         backgroundSize:'cover'
-        // width:150
         },
         headerStyle:{
         padding: 0
+        },
+        headerTextStyle:{
+            bottom:0,
+            position: 'absolute',
+            color: Colors.whiteText,
+            fontFamily: 'Montserrat',
         }
 };
 export default drawerStyle;
