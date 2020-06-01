@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import eventContainerStyle from "./eventContainerStyle";
-import { Card, Row ,TimePicker} from "antd";
+import { Card, Row} from "antd";
 
 function setLinesNumber(text) {
   var final = text.substr(0, 70);
@@ -22,7 +22,7 @@ function EventContainer(props) {
     <Card
       onClick={props.onClick}
       hoverable
-      style={{ width: "100%", borderTopLeftRadius: 6, borderTopRightRadius: 6 }}
+      style={{ width: "100%", borderTopLeftRadius: 6, borderTopRightRadius: 6 ,borderWidth:0}}
       cover={<img alt="example" src={props.image} />}
     >
       <h3 style={eventContainerStyle.name}>{props.name}</h3>

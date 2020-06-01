@@ -5,8 +5,7 @@ import moment from 'moment';
 
 function TaskModal(props) {
     // Similar to componentDidMount and componentDidUpdate:
-    return (
-        <Modal
+    return (<Modal
             closable={false}
             title="Edit"
             centered

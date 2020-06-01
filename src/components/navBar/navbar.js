@@ -3,7 +3,7 @@ import { Menu, Affix } from "antd";
 import {
   MailOutlined,
   AppstoreOutlined,
-  MenuOutlined,
+  MenuOutlined, LogoutOutlined, SettingOutlined,
 } from "@ant-design/icons";
 import Colors from "../../config/colors";
 import logo from "../../assets/noTextLogo.png";
@@ -76,29 +76,20 @@ class Navbar extends Component {
             }
           />
 
-          <Menu.Item
-            style={{ float: "right" }}
-            key="mail"
-            icon={<MailOutlined />}
-          >
-            Navigation One
-        </Menu.Item>
+        {/*  <Menu.Item*/}
+        {/*    style={{ float: "right" }}*/}
+        {/*    key="logout"*/}
+        {/*    icon={<LogoutOutlined />}*/}
+        {/*  >*/}
+        {/*    Logout*/}
+        {/*</Menu.Item>*/}
           <Menu.Item
             style={{ float: "right" }}
             key="app"
-            icon={<AppstoreOutlined />}
+            icon={<SettingOutlined />}
           >
-            Navigation Two
+            Settings
         </Menu.Item>
-          <Menu.Item style={{ float: "right" }} key="alipay">
-            <a
-              href="https://ant.design"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Navigation Four - Link
-          </a>
-          </Menu.Item>
         </Menu>
       </Affix>
     );

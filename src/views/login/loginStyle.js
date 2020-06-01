@@ -1,4 +1,5 @@
 import Colors from "../../config/colors";
+import backgroundImage from "../../assets/background.jpg";
 
 let loginStyle = {
     title: {
@@ -9,20 +10,23 @@ let loginStyle = {
         paddingTop: '7%',
         alignContent: 'center',
         backgroundColor: Colors.backgroundColor,
-        minHeight: '650px'
+        minHeight: '600px',
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize:'cover'
     },
     card: {
         backgroundColor: Colors.whiteText,
         margin: '2%',
         borderRadius: 6,
-        minWidth: '60%',
-        maxWidth: '65%',
+        minWidth: '50%',
+        maxWidth: '55%',
     },
     inputStyle: {},
     buttonStyle: {
         border: 0,
         borderRadius: 6,
-        margin: '1%',
+        margin: '5%',
         backgroundColor: Colors.lightButtonColor
     }
 };

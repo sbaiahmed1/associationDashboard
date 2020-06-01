@@ -5,13 +5,14 @@ import dashboardHomeStyle from "./dashboarHomeStyle";
 import Navbar from "../../components/navBar/navbar";
 import {connect} from "react-redux";
 import {loggedIn} from "../../redux/actions/login";
-import {Events, Tasks, Routes} from "../../config/constants";
+import {EventsDummy, Tasks, Routes} from "../../config/constants";
 import event from "../../assets/event.jpg";
 import EventContainer from "../../components/eventContainer/eventContainer";
 import EventModal from "../../components/eventModal/eventModal";
 import {Link} from "react-router-dom";
 import TaskContainer from "../../components/taskContainer/taskContainer";
 import TaskModal from "../../components/taskModal/taskModal";
+import ListHeader from "../../components/listHeader/listHeader";
 
 class DashboardHome extends Component {
     state = {
@@ -132,55 +133,42 @@ class DashboardHome extends Component {
                     onClose={() => this.onClose(false)}
                     content={Routes}
                 />
-                <List
-                    grid={{
-                        gutter: 16,
-                        xs: 1,
-                        sm: 2,
-                        md: 4,
-                        lg: 4,
-                        xl: 4,
-                        xxl: 3,
-                    }}
-                    header={
-                        <div>
-                            <Row style={{justifyContent: 'space-between'}}>
-                                <h2 style={{fontFamily: "Montserrat", fontWeight: "bold"}}>
-                                    Recently added events
-                                </h2>
-                                <Link to={'/events'}>
-                                    <h4 style={{fontFamily: "Montserrat", fontWeight: "500", paddingTop: 10}}>See all
-                                        events</h4>
-                                </Link>
-
-                            </Row>
-
-                        </div>
-                    }
-                    bordered
-                    dataSource={Events}
-                    renderItem={(item) => (
-                        <List.Item>
-                            <EventContainer
-                                image={event}
-                                onClick={(_) =>
-                                    this.openEventModal(
-                                        item._id,
-                                        item.name,
-                                        item.description,
-                                        item.location,
-                                        this.getDate(item.date)
-                                    )
-                                }
-                                name={item.name}
-                                description={item.description}
-                                location={item.location}
-                                date={item.date}
-                            />
-                        </List.Item>
-                    )}
+                <ListHeader text={'events'} route={'/tasks'}/>
+                <List style={{margin: 10}}
+                      grid={{
+                          gutter: 16,
+                          xs: 1,
+                          sm: 2,
+                          md: 4,
+                          lg: 4,
+                          xl: 4,
+                          xxl: 3,
+                      }}
+                      dataSource={EventsDummy}
+                      renderItem={(item) => (
+                          <List.Item>
+                              <EventContainer
+                                  image={event}
+                                  onClick={(_) =>
+                                      this.openEventModal(
+                                          item._id,
+                                          item.name,
+                                          item.description,
+                                          item.location,
+                                          this.getDate(item.date)
+                                      )
+                                  }
+                                  name={item.name}
+                                  description={item.description}
+                                  location={item.location}
+                                  date={item.date}
+                              />
+                          </List.Item>
+                      )}
                 />
+                <ListHeader text={'tasks'} route={'/tasks'}/>
                 <List
+                    style={{margin:10}}
                     grid={{
                         gutter: 16,
                         xs: 1,
@@ -190,22 +178,6 @@ class DashboardHome extends Component {
                         xl: 4,
                         xxl: 3,
                     }}
-                    header={
-                        <div>
-                            <Row style={{justifyContent: 'space-between'}}>
-                                <h2 style={{fontFamily: "Montserrat", fontWeight: "bold"}}>
-                                    Recently added Tasks
-                                </h2>
-                                <Link to={'/events'}>
-                                    <h4 style={{fontFamily: "Montserrat", fontWeight: "500", paddingTop: 10}}>See all
-                                        tasks</h4>
-                                </Link>
-
-                            </Row>
-
-                        </div>
-                    }
-                    bordered
                     dataSource={Tasks}
                     renderItem={(item) => (
                         <List.Item>

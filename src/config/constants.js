@@ -1,6 +1,6 @@
-// const baseUrl = 'https://nodebackend-pfe.herokuapp.com/';
-const baseUrl = 'http://127.0.0.1:3000/';
-const Events = [
+const baseUrl = 'https://nodebackend-pfe.herokuapp.com/';
+// const baseUrl = 'http://127.0.0.1:3000/';
+const EventsDummy = [
     {
         _id: '5e8bb2f998571c7a788c62d2',
         name: 'Festival Yoo',
@@ -135,5 +135,70 @@ const Routes = [
     },
 
 ];
-
-export {baseUrl, Events, Tasks, Routes};
+const Roles = [
+    {
+        value: 'all',
+        alias: 'All Poles'
+    },
+    {
+        value: 'president',
+        alias: 'President'
+    },
+    {
+        value: 'Dev Com',
+        alias: 'Developpeur Commercial'
+    },
+    {
+        value: 'tresorier',
+        alias: 'Tresorier'
+    },
+    {
+        value: 'projet',
+        alias: 'Pole projet'
+    },
+    {
+        value: 'adherent',
+        alias: 'Adherent'
+    },
+    {
+        value: 'marketing',
+        alias: 'Marketing'
+    }
+];
+const Regions = [
+    {label: "Ariana", value: "Ariana"},
+    {label: "Beja", value: "Beja"},
+    {label: "BenArous", value: "Ben Arous"},
+    {label: "Bizerte", value: "Bizerte"},
+    {label: "Gabes", value: "Gabes"},
+    {label: "Gafsa", value: "Gafsa"},
+    {label: "Jendouba", value: "Jendouba"},
+    {label: "Kairouan", value: "Kairouan"},
+    {label: "Kasserine", value: "Kasserine"},
+    {label: "Kebili", value: "Kebili"},
+    {label: "La Manouba", value: "La Manouba"},
+    {label: "Le Kef", value: "Le Kef"},
+    {label: "Mahdia", value: "Mahdia"},
+    {label: "Medenine", value: "Medenine"},
+    {label: "Monastir", value: "Monastir"},
+    {label: "Nabeul", value: "Nabeul"},
+    {label: "Sfax", value: "Sfax"},
+    {label: "Sidi Bouzid", value: "Sidi Bouzid"},
+    {label: "Siliana", value: "Siliana"},
+    {label: "Sousse", value: "Sousse"},
+    {label: "Tataouine", value: "Tataouine"},
+    {label: "Tozeur", value: "Tozeur"},
+    {label: "Tunis", value: "Tunis"},
+    {label: "Zaghouan", value: "Zaghouan"}
+];
+const firebaseConfig = {
+    apiKey: "AIzaSyCjom1nUR4CzKYyS51_5kDK7aycirYS7qE",
+    authDomain: "pfeapp-875b5.firebaseapp.com",
+    databaseURL: "https://pfeapp-875b5.firebaseio.com",
+    projectId: "pfeapp-875b5",
+    storageBucket: "pfeapp-875b5.appspot.com",
+    messagingSenderId: "871451797663",
+    appId: "1:871451797663:web:2a0f7c5a93aff46e4c5aaa",
+    measurementId: "G-H0KTPBDGXX"
+};
+export {baseUrl, EventsDummy, Tasks, Routes, Roles, firebaseConfig, Regions};

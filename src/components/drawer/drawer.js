@@ -3,6 +3,8 @@ import {Affix, Avatar, Drawer} from "antd";
 import {Gradient} from 'react-gradient';
 import drawerStyle from "./drawerStyle";
 import {LogoutOutlined} from "@ant-design/icons";
+import {Link} from "react-router-dom";
+import avatar from "../../assets/avatar.png";
 
 const gradients = [
     ['#A9A9A9', '#fff'],
@@ -18,7 +20,9 @@ function SecondDrawer(props) {
             visible={props.secondVisible}
         >
             {props.content && props.content.map(route => {
-                return (<h3>{route.label}</h3>)
+                return (
+                    <Link to={'/'+route.routeName}>
+                    <h3>{route.label}</h3></Link>)
             })}
         </Drawer>
     )
@@ -82,7 +86,7 @@ class DrawerNav extends Component {
                             property="background"
                             duration={1000}
                         >
-                            <div style={drawerStyle.header}>
+                            <div style={Object.assign({},drawerStyle.header,{backgroundImage: `url(${avatar})`}) }>
                                 <h3 style={drawerStyle.headerTextStyle}>Ahmed Sbai (Admin)</h3>
                             </div>
                         </Gradient>
@@ -102,7 +106,9 @@ class DrawerNav extends Component {
                             <h3 onClick={() => {
                                 this.setState({secondDrawerContent: route.childrenRoutes});
                                 this.showChildrenDrawer()
-                            }}>{route.label}</h3>)
+                            }}>{route.label}
+                            </h3>
+                        )
                     })}
 
 

@@ -3,7 +3,6 @@ import avatar from '../../assets/avatar.png'
 
 let drawerStyle = {
     header: {
-        backgroundImage: `url(${avatar})`,
         maxWidth: '100%',
         minHeight: 200,
         backgroundRepeat: 'no-repeat',
