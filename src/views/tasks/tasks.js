@@ -7,7 +7,6 @@ import axios from 'axios'
 import {List} from "antd";
 import TaskContainer from "../../components/taskContainer/taskContainer";
 import tasksStyle from "./tasksStyle";
-// import dashboardHomeStyle from "../dashboardHome/dashboarHomeStyle";
 
 class Tasks extends Component {
     constructor(props) {
@@ -29,7 +28,7 @@ class Tasks extends Component {
         this.setState({loading: true});
         let url = baseUrl + 'task';
         let token = localStorage.getItem('token');
-        var options = {
+        const options = {
             accept: '*/*',
             headers: {
                 token: token,
