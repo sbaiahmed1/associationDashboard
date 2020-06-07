@@ -70,14 +70,6 @@ class Tasks extends Component {
     };
     openTaskModal = async (id, title, content) => {
         this.setState({
-            taskModalContent: {
-                id: id,
-                title: title,
-                content: content,
-                checked: false
-            },
-        });
-        this.setState({
             taskModalVisible: true,
         });
     };

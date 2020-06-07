@@ -191,4 +191,14 @@ const Regions = [
     {label: "Tunis", value: "Tunis"},
     {label: "Zaghouan", value: "Zaghouan"}
 ];
+const firebaseConfig = {
+    apiKey: "AIzaSyCjom1nUR4CzKYyS51_5kDK7aycirYS7qE",
+    authDomain: "pfeapp-875b5.firebaseapp.com",
+    databaseURL: "https://pfeapp-875b5.firebaseio.com",
+    projectId: "pfeapp-875b5",
+    storageBucket: "pfeapp-875b5.appspot.com",
+    messagingSenderId: "871451797663",
+    appId: "1:871451797663:web:2a0f7c5a93aff46e4c5aaa",
+    measurementId: "G-H0KTPBDGXX"
+};
 export {baseUrl, EventsDummy, Tasks, Routes, Roles, firebaseConfig, Regions};

@@ -7,7 +7,6 @@ import Navbar from "../../components/navBar/navbar";
 import DrawerNav from "../../components/drawer/drawer";
 import UserContainer from "../../components/userContainer/userContainer";
 import UserModal from "../../components/userModal/userModal";
-import TaskModal from "../../components/taskModal/taskModal";
 
 const jwt = require('jsonwebtoken');
 
