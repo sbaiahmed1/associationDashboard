@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Affix, Avatar, Drawer} from "antd";
+import {Affix, Drawer} from "antd";
 import {Gradient} from 'react-gradient';
 import drawerStyle from "./drawerStyle";
 import {LogoutOutlined} from "@ant-design/icons";
@@ -21,8 +21,8 @@ function SecondDrawer(props) {
         >
             {props.content && props.content.map(route => {
                 return (
-                    <Link to={'/'+route.routeName}>
-                    <h3>{route.label}</h3></Link>)
+                    <Link to={'/' + route.routeName}>
+                        <h3>{route.label}</h3></Link>)
             })}
         </Drawer>
     )
@@ -36,11 +36,6 @@ class DrawerNav extends Component {
         secondVisible: false,
         secondDrawerContent: []
     };
-
-    constructor(props) {
-        super(props);
-    }
-
     showChildrenDrawer = () => {
         this.setState({
             secondVisible: true,
@@ -86,7 +81,7 @@ class DrawerNav extends Component {
                             property="background"
                             duration={1000}
                         >
-                            <div style={Object.assign({},drawerStyle.header,{backgroundImage: `url(${avatar})`}) }>
+                            <div style={Object.assign({}, drawerStyle.header, {backgroundImage: `url(${avatar})`})}>
                                 <h3 style={drawerStyle.headerTextStyle}>Ahmed Sbai (Admin)</h3>
                             </div>
                         </Gradient>

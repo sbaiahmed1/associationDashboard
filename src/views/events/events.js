@@ -1,11 +1,9 @@
 import React, {Component} from "react";
 import Navbar from "../../components/navBar/navbar";
 import DrawerNav from "../../components/drawer/drawer";
-import {baseUrl, Routes, EventsDummy} from "../../config/constants";
-import axios from 'axios'
+import {EventsDummy, Routes} from "../../config/constants";
 import {List} from "antd";
 import event from "../../assets/event.jpg";
-import TaskContainer from "../../components/taskContainer/taskContainer";
 import eventStyle from "./eventStyle";
 import EventModal from "../../components/eventModal/eventModal";
 import EventContainer from "../../components/eventContainer/eventContainer";
@@ -145,7 +143,7 @@ class Events extends Component {
                     onClose={() => this.onClose(false)}
                     content={Routes}
                 />
-                <ListHeader text={'events'} hideShowAll={true} />
+                <ListHeader text={'events'} hideShowAll={true}/>
                 <List
                     style={{margin: 10}}
                     grid={{

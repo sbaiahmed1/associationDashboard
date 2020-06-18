@@ -3,10 +3,9 @@ import Navbar from "../../components/navBar/navbar";
 import DrawerNav from "../../components/drawer/drawer";
 import {firebaseConfig, Regions, Routes,} from "../../config/constants";
 import addEventStyle from "./addEventStyle";
-import {Card, Form, Input, Button, Row, TimePicker, DatePicker, Upload, Select} from "antd";
-import moment from "moment";
+import {Button, Card, DatePicker, Form, Input, Row, Select, TimePicker, Upload} from "antd";
 import * as firebase from "firebase";
-import {FileImageOutlined, InboxOutlined} from "@ant-design/icons";
+import {FileImageOutlined} from "@ant-design/icons";
 
 firebase.initializeApp(firebaseConfig);
 const jwt = require('jsonwebtoken');
@@ -126,16 +125,16 @@ class AddEvent extends Component {
                             </Row>
                             <Form.Item placeholder={'Select a region'} label={'Region'}
                                        name={'region'}
-                            rules={[
-                                {
-                                    required:true,
-                                    message:'Please select the event region ',
-                                }
-                            ]}
+                                       rules={[
+                                           {
+                                               required: true,
+                                               message: 'Please select the event region ',
+                                           }
+                                       ]}
                             >
                                 <Select>
                                     {this.state.regions !== [] && this.state.regions.map(region => {
-                                       return <Select.Option key={region.value}>{region.label}</Select.Option>
+                                        return <Select.Option key={region.value}>{region.label}</Select.Option>
                                     })}
                                 </Select>
                             </Form.Item>

@@ -1,15 +1,14 @@
 import React, {Component} from "react";
 import DrawerNav from "../../components/drawer/drawer";
-import {Menu, Row, List} from "antd";
+import {List} from "antd";
 import dashboardHomeStyle from "./dashboarHomeStyle";
 import Navbar from "../../components/navBar/navbar";
 import {connect} from "react-redux";
 import {loggedIn} from "../../redux/actions/login";
-import {EventsDummy, Tasks, Routes} from "../../config/constants";
+import {EventsDummy, Routes, Tasks} from "../../config/constants";
 import event from "../../assets/event.jpg";
 import EventContainer from "../../components/eventContainer/eventContainer";
 import EventModal from "../../components/eventModal/eventModal";
-import {Link} from "react-router-dom";
 import TaskContainer from "../../components/taskContainer/taskContainer";
 import TaskModal from "../../components/taskModal/taskModal";
 import ListHeader from "../../components/listHeader/listHeader";
@@ -168,7 +167,7 @@ class DashboardHome extends Component {
                 />
                 <ListHeader text={'tasks'} route={'/tasks'}/>
                 <List
-                    style={{margin:10}}
+                    style={{margin: 10}}
                     grid={{
                         gutter: 16,
                         xs: 1,

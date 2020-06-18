@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import userContainerStyle from "./userContainerStyle";
-import {Avatar, Card, Row, TimePicker} from "antd";
+import {Avatar, Card} from "antd";
 
 
 function UserContainer(props) {

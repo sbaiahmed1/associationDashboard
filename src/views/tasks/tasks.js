@@ -41,6 +41,7 @@ class Tasks extends Component {
                 let newAdded = [];
                 let old = [];
                 console.log(datas);
+                // eslint-disable-next-line array-callback-return
                 datas.map(data => {
                     if (data.checked === true) {
                         old.push(data);

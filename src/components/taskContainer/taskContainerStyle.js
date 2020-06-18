@@ -1,21 +1,19 @@
-import Colors from "../../config/colors";
+let taskContainerStyle = {
 
-let taskContainerStyle={
-
-    container:{
+    container: {
         width: '100%',
     },
-    content:{
+    content: {
         fontFamily: 'Montserrat',
-        textAlign:'left',
-        fontWeight:'500',
+        textAlign: 'left',
+        fontWeight: '500',
         fontSize: 15
 
     },
-    title:{
+    title: {
         fontFamily: 'Montserrat',
-        textAlign:'left',
-        fontWeight:'Bold',
+        textAlign: 'left',
+        fontWeight: 'Bold',
         fontSize: 25,
     },
 }

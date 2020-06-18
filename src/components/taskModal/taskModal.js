@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from "react";
-import {Modal, Row, TimePicker, DatePicker} from "antd";
+import React from "react";
+import {Modal} from "antd";
 import Paragraph from "antd/lib/typography/Paragraph";
-import moment from 'moment';
 
 function TaskModal(props) {
     // Similar to componentDidMount and componentDidUpdate:
