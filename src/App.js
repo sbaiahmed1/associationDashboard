@@ -7,6 +7,7 @@ import AddTask from "./views/tasks/addTask";
 import Events from "./views/events/events";
 import AddEvent from "./views/events/addEvent";
 import Users from "./views/users/users";
+import LayoutPage from "./views/layout/layout";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route exact path={'/addevent'} component={AddEvent}/>
                 <Route exact path={'/events'} component={Events}/>
                 <Route exact path={'/users'} component={Users}/>
+                <Route exact path={'/layout'} component={LayoutPage}/>
             </Switch>
         </Router>
     );
