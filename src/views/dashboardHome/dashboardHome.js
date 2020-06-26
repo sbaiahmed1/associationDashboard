@@ -35,16 +35,6 @@ class DashboardHome extends Component {
         return [realTime, realDate];
     }
 
-    onOpen = () => {
-        this.setState({
-            visible: true,
-        });
-    };
-    onClose = () => {
-        this.setState({
-            visible: false,
-        });
-    };
     openEventModal = async (id, name, description, location, date) => {
         this.setState({
             eventModalContent: {
@@ -125,68 +115,6 @@ class DashboardHome extends Component {
                         }}
                         visible={this.state.taskModalVisible}
                         ok={() => this.setState({taskModalVisible: false})}
-                    />
-                    <ListHeader text={'events'} route={'/tasks'}/>
-                    <List style={{margin: 10}}
-                          grid={{
-                              gutter: 16,
-                              xs: 1,
-                              sm: 2,
-                              md: 4,
-                              lg: 4,
-                              xl: 4,
-                              xxl: 3,
-                          }}
-                          dataSource={EventsDummy}
-                          renderItem={(item) => (
-                              <List.Item>
-                                  <EventContainer
-                                      image={event}
-                                      onClick={(_) =>
-                                          this.openEventModal(
-                                              item._id,
-                                              item.name,
-                                              item.description,
-                                              item.location,
-                                              this.getDate(item.date)
-                                          )
-                                      }
-                                      name={item.name}
-                                      description={item.description}
-                                      location={item.location}
-                                      date={item.date}
-                                  />
-                              </List.Item>
-                          )}
-                    />
-                    <ListHeader text={'tasks'} route={'/tasks'}/>
-                    <List
-                        style={{margin: 10}}
-                        grid={{
-                            gutter: 16,
-                            xs: 1,
-                            sm: 2,
-                            md: 4,
-                            lg: 4,
-                            xl: 4,
-                            xxl: 3,
-                        }}
-                        dataSource={Tasks}
-                        renderItem={(item) => (
-                            <List.Item>
-                                <TaskContainer
-                                    onClick={(_) =>
-                                        this.openTaskModal(
-                                            item._id,
-                                            item.title,
-                                            item.content,
-                                        )
-                                    }
-                                    title={item.title}
-                                    content={item.content}
-                                />
-                            </List.Item>
-                        )}
                     />
                     <BackTop visibilityHeight={50}/>
                 </div>

@@ -3,10 +3,15 @@ import React, {Component} from "react";
 import './layout.css'
 import logo from '../../assets/logo.png'
 import {PoweroffOutlined, SettingOutlined} from "@ant-design/icons";
+import {Link} from "react-router-dom";
 
 const {Header, Content, Footer, Sider} = Layout;
 
 class LayoutPage extends Component {
+    state = {
+        broken: false
+    }
+
     render() {
         return (
             <Layout>
@@ -15,9 +20,14 @@ class LayoutPage extends Component {
                     collapsedWidth="0"
                     onBreakpoint={broken => {
                         console.log(broken);
+                        this.setState({broken: !this.state.broken})
                     }}
                     onCollapse={(collapsed, type) => {
                         console.log(collapsed, type);
+                    }}
+                    style={{
+                        position: 'fixed',
+                        minHeight: '100%'
                     }}
                 >
                     <div className="logo">
@@ -29,7 +39,7 @@ class LayoutPage extends Component {
                                 <Menu.SubMenu title={route.label}>
                                     {route.childrenRoutes.map(routes => {
                                         return (
-                                            <Menu.Item>{routes.label}</Menu.Item>
+                                            <Menu.Item><Link to={'/' + routes.routeName}/>{routes.label}</Menu.Item>
                                         )
                                     })}
                                 </Menu.SubMenu>
@@ -38,18 +48,18 @@ class LayoutPage extends Component {
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Header className="site-layout-sub-header-background" style={{padding: 0}}>
+                    <Header className="site-layout-sub-header-background" style={{position:'fixed',minWidth:'100%',padding: 0}}>
                         <Row
-                        style={{float:'right', margin:20}}
+                            style={{float: 'right', margin: 20}}
                         >
                             <Button
-                                style={{marginLeft:10}}
-                                type="primary"
+                                style={{marginLeft: 10}}
+                                type="outlined"
                                 icon={<PoweroffOutlined/>}
                             >Logout</Button>
                             <Button
-                                style={{marginLeft:10}}
-                                type="primary"
+                                style={{marginLeft: 10}}
+                                type="outlined"
                                 icon={<SettingOutlined/>}
                             >Settings</Button>
                         </Row>
