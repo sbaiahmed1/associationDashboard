@@ -1,121 +1,148 @@
-import React, {Component} from "react";
-import {BackTop, List} from "antd";
-import dashboardHomeStyle from "./dashboarHomeStyle";
+import React, {Component, createRef} from "react";
+import {BackTop, Row} from "antd";
 import {connect} from "react-redux";
 import {loggedIn} from "../../redux/actions/login";
-import {EventsDummy, Routes, Tasks} from "../../config/constants";
-import event from "../../assets/event.jpg";
-import EventContainer from "../../components/eventContainer/eventContainer";
-import EventModal from "../../components/eventModal/eventModal";
-import TaskContainer from "../../components/taskContainer/taskContainer";
-import TaskModal from "../../components/taskModal/taskModal";
-import ListHeader from "../../components/listHeader/listHeader";
+import {Routes} from "../../config/constants";
 import LayoutPage from "../layout/layout";
+import StatsCard from "../../components/statsCard/statsCard";
+import {DualLine} from "@ant-design/charts";
+
+const data1 = [
+    {year: '09/07', IOS: 3},
+    {year: '10/07', IOS: 4},
+    {year: '11/07', IOS: 3.5},
+    {year: '12/07', IOS: 5},
+    {year: '13/07', IOS: 4.9},
+    {year: '14/07', IOS: 6},
+    {year: '15/07', IOS: 7},
+    {year: '16/07', IOS: 9},
+    {year: '17/07', IOS: 13},
+];
+
+const data2 = [
+    {year: '09/07', Android: 10},
+    {year: '10/07', Android: 4},
+    {year: '11/07', Android: 5},
+    {year: '12/07', Android: 5},
+    {year: '13/07', Android: 4.9},
+    {year: '14/07', Android: 35},
+    {year: '15/07', Android: 7},
+    {year: '16/07', Android: 1},
+    {year: '17/07', Android: 20},
+];
+const config = {
+    data: [data1, data2],
+    title: {
+        visible: true,
+        text: 'Mobile Users',
+    },
+    xField: 'year',
+    yField: ['IOS', 'Android'],
+};
+const cardStats = [
+    {
+        cardTitle: 'Total Users',
+        cardValue: 20,
+    },
+    {
+        cardTitle: 'Total Tasks',
+        cardValue: 20,
+    },
+    {
+        cardTitle: 'Total Events',
+        cardValue: 20,
+    },
+    {
+        cardTitle: 'Total Polls',
+        cardValue: 20,
+    }
+]
+const gradientsAll = [
+    [
+        ['#42CAFD', '#66B3BA'],
+        ['#8EB19D', '#F6EFA6']
+    ],
+    [
+        ['#DDFFF7', '#93E1D8'],
+        ['#FFA69E', '#AA4465']
+    ],
+    [
+        ['#DDFFF7', '#FFD2FC'],
+        ['#E980FC', '#E980FC']
+    ],
+    [
+        ['#F46036', '#2E294E'],
+        ['#1B998B', '#E71D36']
+    ],
+    [
+        ['#D8CFAF', '#E6B89C'],
+        ['#ED9390', '#F374AE']
+    ],
+    [
+        ['#6C464F', '#9E768F'],
+        ['#9FA4C4', '#B3CDD1']
+    ],
+    [
+        ['#65DEF1', '#A8DCD1'],
+        ['#DCE2C8', '#F96900']
+    ],
+
+
+];
+// const content = (
+//     <div>
+//         <p>Content</p>
+//         <p>Content</p>
+//     </div>
+// );
 
 class DashboardHome extends Component {
+    ref = createRef();
     state = {
-        drawerVisible: false,
-        eventModalVisible: false,
-        taskModalVisible: false,
-        taskModalContent: {},
-        eventModalContent: {},
-        date: '',
-        time: ''
+        width: 1366,
+        height: 50
     };
 
-    getDate(date) {
-        date = new Date(date * 1000);
-        var year = date.getFullYear();
-        var month = date.getMonth();
-        var day = date.getDate();
-        var hours = date.getHours();
-        var minutes = "0" + date.getMinutes();
-        var realDate = month + "/" + day + "/" + year;
-        var realTime = hours + ":" + minutes.substr(-2);
-        return [realTime, realDate];
+    // DownloadImage
+    downloadImage = () => {
+        return this.ref.current?.downloadImage();
+    };
+
+    // Get data base64
+    toDataURL = () => {
+        console.log(this.ref.current?.toDataURL());
+    };
+
+    updateDimensions = () => {
+        this.setState({width: window.innerWidth, height: window.innerHeight});
+    };
+
+    componentDidMount() {
+        window.addEventListener('resize', this.updateDimensions);
     }
 
-    openEventModal = async (id, name, description, location, date) => {
-        this.setState({
-            eventModalContent: {
-                id: id,
-                name: name,
-                description: description,
-                location: location,
-                date: date,
-            },
-        });
-        this.setState({
-            eventModalVisible: true,
-        });
-    };
-    /****************************************************/
-    openTaskModal = async (id, title, content) => {
-        this.setState({
-            taskModalContent: {
-                id: id,
-                title: title,
-                content: content,
-                checked: false
-            },
-        });
-        this.setState({
-            taskModalVisible: true,
-        });
-    };
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateDimensions);
+    }
 
     render() {
         return (
             <LayoutPage content={Routes}>
-                <div style={dashboardHomeStyle.container}>
-                    <EventModal
-                        onChangeHours={(time) => {
-                            this.setState({
-                                time: time.hours() + ':' + time.minutes(),
-                            });
-                        }}
-                        onChangeDate={(date) => {
-                            this.setState({
-                                eventModalContent: {
-                                    ...this.state.eventModalContent,
-                                    date: [...this.state.eventModalContent.date, this.state.eventModalContent.date.splice(1, 1, ((date.month() + 1) + '-' + date.date() + '-' + date.year()))]
-                                },
-                            });
-                        }}
-                        content={this.state.eventModalContent}
-                        onChangeName={(str) => {
-                            this.setState({
-                                eventModalContent: {...this.state.eventModalContent, name: str},
-                            });
-                        }}
-                        onChangeDescription={(str) => {
-                            this.setState({
-                                eventModalContent: {...this.state.eventModalContent, description: str},
-                            });
-                        }}
-                        onChangeLocation={(str) => {
-                            this.setState({
-                                eventModalContent: {...this.state.eventModalContent, location: str},
-                            });
-                        }}
-                        visible={this.state.eventModalVisible}
-                        ok={() => this.setState({eventModalVisible: false})}
-                    />
-                    <TaskModal
-                        content={this.state.taskModalContent}
-                        onChangeTitle={(str) => {
-                            this.setState({
-                                taskModalContent: {...this.state.taskModalContent, title: str},
-                            });
-                        }}
-                        onChangeContent={(str) => {
-                            this.setState({
-                                taskModalContent: {...this.state.taskModalContent, content: str},
-                            });
-                        }}
-                        visible={this.state.taskModalVisible}
-                        ok={() => this.setState({taskModalVisible: false})}
-                    />
+
+                <div style={{marginLeft: this.state.width > 576 ? 200 : 0, marginTop: 50}}>
+                    <Row>
+                        {
+                            cardStats && cardStats.map(single => {
+                                return (
+                                    <StatsCard
+                                        gradient={gradientsAll[Math.floor(Math.random() * gradientsAll.length)]}
+                                        cardTitle={single.cardTitle}
+                                        cardValue={single.cardValue}/>
+                                )
+                            })
+                        }
+                    </Row>
+                    <DualLine {...config} chartRef={this.ref}/>
                     <BackTop visibilityHeight={50}/>
                 </div>
             </LayoutPage>

@@ -16,7 +16,7 @@ class LayoutPage extends Component {
         return (
             <Layout>
                 <Sider
-                    breakpoint="lg"
+                    breakpoint="sm"
                     collapsedWidth="0"
                     onBreakpoint={broken => {
                         console.log(broken);
