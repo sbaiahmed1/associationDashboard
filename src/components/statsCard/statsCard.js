@@ -13,7 +13,8 @@ function StatsCard(props) {
                 style={{margin: 20}}
 
             >
-                <div style={{minHeight: 100, minWidth: 150, padding: 50}}>
+                <div style={{minHeight: 100, minWidth: 200, padding: 50}}>
+                    <h1 style={{textAlign:'center',fontSize:20}}>{props.iconName}</h1>
                     <h1 style={{textAlign: 'center'}}>{props.cardTitle}</h1>
                     <h2 style={{textAlign: 'center'}}>{props.cardValue}</h2>
                 </div>

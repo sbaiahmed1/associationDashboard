@@ -1,18 +1,39 @@
 import React, {Component, createRef} from "react";
-import {BackTop, Row} from "antd";
+import {BackTop, Popover, Row} from "antd";
 import {connect} from "react-redux";
 import {loggedIn} from "../../redux/actions/login";
 import {Routes} from "../../config/constants";
 import LayoutPage from "../layout/layout";
 import StatsCard from "../../components/statsCard/statsCard";
-import {DualLine} from "@ant-design/charts";
+import {DualLine, Liquid} from "@ant-design/charts";
+import {BarChartOutlined, CalendarOutlined, UnorderedListOutlined, UserOutlined} from "@ant-design/icons";
+import {WIDTH} from "../../redux/actions/width";
 
+const liquid = {
+    title: {
+        visible: true,
+        text: 'Received on Android % ',
+    },
+    min: 0,
+    alignTo: 'center',
+    max: 100,
+    value: 80,
+}
+const liquid1 = {
+    title: {
+        visible: true,
+        text: 'Received on IOS % ',
+    },
+    min: 0,
+    max: 80,
+    value: 20,
+}
 const data1 = [
     {year: '09/07', IOS: 3},
     {year: '10/07', IOS: 4},
-    {year: '11/07', IOS: 3.5},
+    {year: '11/07', IOS: 7},
     {year: '12/07', IOS: 5},
-    {year: '13/07', IOS: 4.9},
+    {year: '13/07', IOS: 8},
     {year: '14/07', IOS: 6},
     {year: '15/07', IOS: 7},
     {year: '16/07', IOS: 9},
@@ -21,10 +42,10 @@ const data1 = [
 
 const data2 = [
     {year: '09/07', Android: 10},
-    {year: '10/07', Android: 4},
+    {year: '10/07', Android: 16},
     {year: '11/07', Android: 5},
     {year: '12/07', Android: 5},
-    {year: '13/07', Android: 4.9},
+    {year: '13/07', Android: 7},
     {year: '14/07', Android: 35},
     {year: '15/07', Android: 7},
     {year: '16/07', Android: 1},
@@ -41,18 +62,22 @@ const config = {
 };
 const cardStats = [
     {
+        iconName: <UserOutlined/>,
         cardTitle: 'Total Users',
         cardValue: 20,
     },
     {
+        iconName: <UnorderedListOutlined/>,
         cardTitle: 'Total Tasks',
         cardValue: 20,
     },
     {
+        iconName: <CalendarOutlined/>,
         cardTitle: 'Total Events',
         cardValue: 20,
     },
     {
+        iconName: <BarChartOutlined/>,
         cardTitle: 'Total Polls',
         cardValue: 20,
     }
@@ -114,7 +139,7 @@ class DashboardHome extends Component {
     };
 
     updateDimensions = () => {
-        this.setState({width: window.innerWidth, height: window.innerHeight});
+        this.props.widthListener({width: window.outerWidth})
     };
 
     componentDidMount() {
@@ -128,21 +153,29 @@ class DashboardHome extends Component {
     render() {
         return (
             <LayoutPage content={Routes}>
-
-                <div style={{marginLeft: this.state.width > 576 ? 200 : 0, marginTop: 50}}>
-                    <Row>
+                <div style={{marginLeft: this.props.width.width > 576 ? 200 : 0, marginTop: 50}}>
+                    <h1 style={{fontFamily:'Montserrat', fontWeight: 500}}> <BarChartOutlined /> Stats : </h1>
+                    <Row style={{justifyContent: 'space-evenly'}}>
                         {
                             cardStats && cardStats.map(single => {
                                 return (
                                     <StatsCard
                                         gradient={gradientsAll[Math.floor(Math.random() * gradientsAll.length)]}
                                         cardTitle={single.cardTitle}
-                                        cardValue={single.cardValue}/>
+                                        cardValue={single.cardValue}
+                                        iconName={single.iconName}
+                                    />
                                 )
                             })
                         }
                     </Row>
                     <DualLine {...config} chartRef={this.ref}/>
+                    <Row style={{justifyContent: 'space-evenly'}}>
+                        <Popover>
+                            <Liquid {...liquid}/>
+                        </Popover>
+                        <Liquid {...liquid1}/>
+                    </Row>
                     <BackTop visibilityHeight={50}/>
                 </div>
             </LayoutPage>
@@ -155,12 +188,16 @@ const mapDispatchToProps = (dispatch) => {
         isLogged: (global) => {
             dispatch(loggedIn(global));
         },
+        widthListener: (global) =>{
+            dispatch(WIDTH(global));
+        }
     };
 };
 const mapStateToProps = (state) => {
     console.log(state);
     return {
         login: state.login,
+        width : state.width
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardHome);

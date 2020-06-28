@@ -1,13 +1,14 @@
 import React, {Component} from "react";
-import Navbar from "../../components/navBar/navbar";
-import DrawerNav from "../../components/drawer/drawer";
 import {EventsDummy, Routes} from "../../config/constants";
 import {List} from "antd";
 import event from "../../assets/event.jpg";
-import eventStyle from "./eventStyle";
 import EventModal from "../../components/eventModal/eventModal";
 import EventContainer from "../../components/eventContainer/eventContainer";
+import LayoutPage from "../layout/layout";
 import ListHeader from "../../components/listHeader/listHeader";
+import {loggedIn} from "../../redux/actions/login";
+import {WIDTH} from "../../redux/actions/width";
+import {connect} from "react-redux";
 
 class Events extends Component {
     constructor(props) {
@@ -95,6 +96,17 @@ class Events extends Component {
         var realTime = hours + ":" + minutes.substr(-2);
         return [realTime, realDate];
     }
+    updateDimensions = () => {
+        this.props.widthListener({width: window.outerWidth})
+    };
+
+    componentDidMount() {
+        window.addEventListener('resize', this.updateDimensions);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateDimensions);
+    }
 
     /******************************************************/
     // componentDidMount() {
@@ -103,83 +115,66 @@ class Events extends Component {
 
     render() {
         return (
-            <div style={eventStyle.container}>
-                <EventModal
-                    onChangeHours={(time) => {
-                        this.setState({
-                            time: time.hours() + ':' + time.minutes(),
-                        });
-                    }}
-                    onChangeDate={(date) => {
-                        this.setState({
-                            eventModalContent: {
-                                ...this.state.eventModalContent,
-                                date: [...this.state.eventModalContent.date, this.state.eventModalContent.date.splice(1, 1, ((date.month() + 1) + '-' + date.date() + '-' + date.year()))]
-                            },
-                        });
-                    }}
-                    content={this.state.eventModalContent}
-                    onChangeName={(str) => {
-                        this.setState({
-                            eventModalContent: {...this.state.eventModalContent, name: str},
-                        });
-                    }}
-                    onChangeDescription={(str) => {
-                        this.setState({
-                            eventModalContent: {...this.state.eventModalContent, description: str},
-                        });
-                    }}
-                    onChangeLocation={(str) => {
-                        this.setState({
-                            eventModalContent: {...this.state.eventModalContent, location: str},
-                        });
-                    }}
-                    visible={this.state.eventModalVisible}
-                    ok={() => this.setState({eventModalVisible: false})}
-                />
-                <Navbar onPressDrawer={() => this.onOpen()}/>
-                <DrawerNav
-                    visible={this.state.visible}
-                    onClose={() => this.onClose(false)}
-                    content={Routes}
-                />
-                <ListHeader text={'events'} hideShowAll={true}/>
-                <List
-                    style={{margin: 10}}
-                    grid={{
-                        gutter: 16,
-                        xs: 1,
-                        sm: 2,
-                        md: 4,
-                        lg: 4,
-                        xl: 4,
-                        xxl: 3,
-                    }}
-                    dataSource={EventsDummy}
-                    renderItem={(item) => (
-                        <List.Item>
-                            <EventContainer
-                                image={event}
-                                onClick={(_) =>
-                                    this.openEventModal(
-                                        item._id,
-                                        item.name,
-                                        item.description,
-                                        item.location,
-                                        this.getDate(item.date)
-                                    )
-                                }
-                                name={item.name}
-                                description={item.description}
-                                location={item.location}
-                                date={item.date}
-                            />
-                        </List.Item>
-                    )}
-                />
-            </div>
+            <LayoutPage content={Routes}>
+                <div
+                    style={{
+                        marginLeft: this.props.width.width > 576 ? 200 : 0,
+                        marginTop: 50
+                    }}>
+                    <ListHeader text={'events'} hideShowAll={true}/>
+                    <List
+                        style={{margin: 10}}
+                        grid={{
+                            gutter: 16,
+                            xs: 1,
+                            sm: 2,
+                            md: 4,
+                            lg: 4,
+                            xl: 4,
+                            xxl: 3,
+                        }}
+                        dataSource={EventsDummy}
+                        renderItem={(item) => (
+                            <List.Item>
+                                <EventContainer
+                                    image={event}
+                                    onClick={(_) =>
+                                        this.openEventModal(
+                                            item._id,
+                                            item.name,
+                                            item.description,
+                                            item.location,
+                                            this.getDate(item.date)
+                                        )
+                                    }
+                                    name={item.name}
+                                    description={item.description}
+                                    location={item.location}
+                                    date={item.date}
+                                />
+                            </List.Item>
+                        )}
+                    />
+                </div>
+            </LayoutPage>
         );
     }
 }
-
-export default Events;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        isLogged: (global) => {
+            dispatch(loggedIn(global));
+        },
+        widthListener: (global) =>{
+            dispatch(WIDTH(global));
+        }
+    };
+};
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        login: state.login,
+        width : state.width
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps) (Events);

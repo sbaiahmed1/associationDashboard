@@ -31,7 +31,8 @@ class LayoutPage extends Component {
                     }}
                 >
                     <div className="logo">
-                        <img src={logo} alt={'logo'}/>
+                        <Link to={'/'}>                        <img src={logo} alt={'logo'}/>
+                        </Link>
                     </div>
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={[this.props.selectedIndex]}>
                         {this.props.content && this.props.content.map(route => {

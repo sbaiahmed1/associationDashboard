@@ -1,9 +1,9 @@
 import LoginReducer from './authReducer';
 import {combineReducers} from 'redux';
-import AvatarReducer from './avatarReducer';
+import WidthReducer from './widthReducer';
 
 const RootReducer = combineReducers({
   login: LoginReducer,
-  avatar: AvatarReducer,
+  width: WidthReducer,
 });
 export default RootReducer;
