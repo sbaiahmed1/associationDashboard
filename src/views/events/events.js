@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {EventsDummy, Routes} from "../../config/constants";
 import {List} from "antd";
 import event from "../../assets/event.jpg";
-import EventModal from "../../components/eventModal/eventModal";
 import EventContainer from "../../components/eventContainer/eventContainer";
 import LayoutPage from "../layout/layout";
 import ListHeader from "../../components/listHeader/listHeader";
