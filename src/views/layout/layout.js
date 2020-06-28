@@ -48,7 +48,7 @@ class LayoutPage extends Component {
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Header className="site-layout-sub-header-background" style={{position:'fixed',minWidth:'100%',padding: 0}}>
+                    <Header theme="dark" className="site-layout-sub-header-background" style={{position:'fixed',minWidth:'100%',padding: 0}}>
                         <Row
                             style={{float: 'right', margin: 20}}
                         >
