@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 import loginStyle from "./loginStyle";
-import {Form, Input, Button, Checkbox, Spin, Modal, message} from "antd";
+import {Button, Checkbox, Form, Input, message, Modal, Row, Spin} from "antd";
 import axios from "axios";
 import Colors from "../../config/colors";
 import {baseUrl} from "../../config/constants";
 import {connect} from "react-redux";
 import {loggedIn} from "../../redux/actions/login";
+import {UserOutlined} from "@ant-design/icons";
+import image from '../../assets/image.jpg'
 
 const jwt = require('jsonwebtoken');
 
@@ -102,8 +104,7 @@ class Login extends Component {
             await jwt.verify(token, 'secret');
             console.log('token verified');
             this.props.history.push('/dashboard')
-        }
-        catch (e){
+        } catch (e) {
             console.log(e.message)
         }
     }
@@ -111,67 +112,69 @@ class Login extends Component {
     render() {
         return (
             <div align="center" style={loginStyle.container}>
-                <div style={loginStyle.card}>
-                    <h1 style={loginStyle.title}>Admin Login</h1>
-                    <Spin spinning={this.state.isLoading}>
-                        <div style={{width: "50%", alignItems: "center"}}>
-                            <Form name="basic" initialValues={{remember: true}}>
-                                <Form.Item
-                                    label="Email"
-                                    name="email"
-                                    rules={[
-                                        {required: true, message: "Please input your email!"},
-                                    ]}
-                                >
-                                    <Input
-                                        onChange={(e) => {
-                                            this.setState({email: e.target.value});
-                                            this.validateCreds();
-                                        }}
-                                    />
-                                </Form.Item>
-
-                                <Form.Item
-                                    label="Password"
-                                    name="password"
-                                    rules={[
-                                        {required: true, message: "Please input your password!"},
-                                    ]}
-                                >
-                                    <Input.Password
-                                        onBlur={()=>this.validateCreds()}
-                                        onChange={(e) => {
-                                            this.setState({password: e.target.value});
-                                            this.validateCreds();
-                                        }}
-                                    />
-                                </Form.Item>
-
-                                <Form.Item name="remember" valuePropName="checked">
-                                    <Checkbox>Remember me</Checkbox>
-                                </Form.Item>
-
-                                <Form.Item>
-                                    <Button
-                                        disabled={!this.state.validated}
-                                        loading={this.state.isLoading}
-                                        onClick={() => this.login()}
-                                        style={Object.assign(
-                                            {},
-                                            loginStyle.buttonStyle,
-                                            this.state.validated
-                                                ? {backgroundColor: Colors.buttonColor}
-                                                : {backgroundColor: Colors.lightButtonColor}
-                                        )}
-                                        type="primary"
-                                        htmlType="submit"
+                <div align={'center'} style={loginStyle.card}>
+                    <div>
+                        <img alt={'image'} src={image} style={{
+                            minWidth: '40%',
+                            maxWidth: '50%',
+                        }}/>
+                    </div>
+                        <Spin spinning={this.state.isLoading}>
+                            <div style={{width: "50%", alignItems: "center"}}>
+                                <Form name="basic" initialValues={{remember: true}}>
+                                    <Form.Item
+                                        name="email"
+                                        rules={[
+                                            {required: true, message: "Please input your email!"},
+                                        ]}
                                     >
-                                        Submit
-                                    </Button>
-                                </Form.Item>
-                            </Form>
-                        </div>
-                    </Spin>
+                                        <Input
+                                            prefix={<UserOutlined style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                            onChange={(e) => {
+                                                this.setState({email: e.target.value});
+                                                this.validateCreds();
+                                            }}
+                                        />
+                                    </Form.Item>
+                                    <Form.Item
+                                        name="password"
+                                        rules={[
+                                            {required: true, message: "Please input your password!"},
+                                        ]}
+                                    >
+                                        <Input.Password
+                                            onBlur={() => this.validateCreds()}
+                                            onChange={(e) => {
+                                                this.setState({password: e.target.value});
+                                                this.validateCreds();
+                                            }}
+                                        />
+                                    </Form.Item>
+                                    <Form.Item name="remember" valuePropName="checked">
+                                        <Checkbox>Remember me</Checkbox>
+                                    </Form.Item>
+
+                                    <Form.Item>
+                                        <Button
+                                            disabled={!this.state.validated}
+                                            loading={this.state.isLoading}
+                                            onClick={() => this.login()}
+                                            style={Object.assign(
+                                                {},
+                                                loginStyle.buttonStyle,
+                                                this.state.validated
+                                                    ? {backgroundColor: Colors.buttonColor}
+                                                    : {backgroundColor: Colors.lightButtonColor}
+                                            )}
+                                            type="primary"
+                                            htmlType="submit"
+                                        >
+                                            Submit
+                                        </Button>
+                                    </Form.Item>
+                                </Form>
+                            </div>
+                        </Spin>
                 </div>
             </div>
         );

@@ -7,20 +7,22 @@ let loginStyle = {
         padding: 20
     },
     container: {
-        paddingTop: '7%',
+        paddingTop: '2%',
         alignContent: 'center',
-        backgroundColor: Colors.backgroundColor,
-        minHeight: '600px',
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundColor: '#47c4fd',
+        width: '100%',
+        height: '100%',
+        backgroundAttachment: 'fixed',
+        // backgroundImage: `url(${backgroundImage})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize:'cover'
     },
     card: {
-        backgroundColor: Colors.whiteText,
         margin: '2%',
         borderRadius: 6,
-        minWidth: '50%',
-        maxWidth: '55%',
+        minWidth: '30%',
+        maxWidth: '40%',
+        backgroundColor: Colors.whiteText,
     },
     inputStyle: {},
     buttonStyle: {
