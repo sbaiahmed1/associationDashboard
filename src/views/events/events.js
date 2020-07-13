@@ -8,6 +8,8 @@ import ListHeader from "../../components/listHeader/listHeader";
 import {loggedIn} from "../../redux/actions/login";
 import {WIDTH} from "../../redux/actions/width";
 import {connect} from "react-redux";
+import EventModal from "../../components/eventModal/eventModal";
+import Colors from "../../config/colors";
 
 class Events extends Component {
     constructor(props) {
@@ -115,12 +117,44 @@ class Events extends Component {
     render() {
         return (
             <LayoutPage content={Routes}>
+                <EventModal
+                    onChangeHours={(time) => {
+                        this.setState({
+                            time: time.hours() + ':' + time.minutes(),
+                        });
+                    }}
+                    onChangeDate={(date) => {
+                        this.setState({
+                            eventModalContent: {
+                                ...this.state.eventModalContent,
+                                date: [...this.state.eventModalContent.date, this.state.eventModalContent.date.splice(1, 1, ((date.month() + 1) + '-' + date.date() + '-' + date.year()))]
+                            },
+                        });
+                    }}
+                    content={this.state.eventModalContent}
+                    onChangeName={(str) => {
+                        this.setState({
+                            eventModalContent: {...this.state.eventModalContent, name: str},
+                        });
+                    }}
+                    onChangeDescription={(str) => {
+                        this.setState({
+                            eventModalContent: {...this.state.eventModalContent, description: str},
+                        });
+                    }}
+                    onChangeLocation={(str) => {
+                        this.setState({
+                            eventModalContent: {...this.state.eventModalContent, location: str},
+                        });
+                    }}
+                    visible={this.state.eventModalVisible}
+                    ok={() => this.setState({eventModalVisible: false})}
+                />
                 <div
                     style={{
                         marginLeft: this.props.width.width > 576 ? 200 : 0,
-                        marginTop: 50
+                        marginTop: 50,
                     }}>
-                    <ListHeader text={'events'} hideShowAll={true}/>
                     <List
                         style={{margin: 10}}
                         grid={{

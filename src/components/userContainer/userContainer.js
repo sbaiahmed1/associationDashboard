@@ -13,7 +13,7 @@ function UserContainer(props) {
                 width: "100%",
                 borderTopLeftRadius: 6,
                 borderTopRightRadius: 6,
-                minHeight: 200,
+                minHeight: 300,
                 backgroundColor: "white"
             }}
         >

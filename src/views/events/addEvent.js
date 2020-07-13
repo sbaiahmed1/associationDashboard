@@ -6,6 +6,10 @@ import addEventStyle from "./addEventStyle";
 import {Button, Card, DatePicker, Form, Input, Row, Select, TimePicker, Upload} from "antd";
 import * as firebase from "firebase";
 import {FileImageOutlined} from "@ant-design/icons";
+import LayoutPage from "../layout/layout";
+import {loggedIn} from "../../redux/actions/login";
+import {WIDTH} from "../../redux/actions/width";
+import {connect} from "react-redux";
 
 firebase.initializeApp(firebaseConfig);
 const jwt = require('jsonwebtoken');
@@ -59,13 +63,8 @@ class AddEvent extends Component {
 
         return (
             <div style={addEventStyle.container}>
-                <Navbar onPressDrawer={() => this.onOpen()}/>
-                <DrawerNav
-                    visible={this.state.visible}
-                    onClose={() => this.onClose(false)}
-                    content={Routes}
-                />
-                <div align={'center'} style={{margin: '2%'}}>
+                <LayoutPage content={Routes}>
+                <div align={'center'} style={{marginLeft: this.props.width.width > 576 ? 200 : 0, marginTop: 50}}>
                     <Card style={{width: '50%', borderRadius: 6}}>
                         <h3>Add a new Event</h3>
                         <Form
@@ -164,9 +163,26 @@ class AddEvent extends Component {
                         </Form>
                     </Card>
                 </div>
+                </LayoutPage>
             </div>
         );
     }
 }
-
-export default AddEvent
+const mapDispatchToProps = (dispatch) => {
+    return {
+        isLogged: (global) => {
+            dispatch(loggedIn(global));
+        },
+        widthListener: (global) => {
+            dispatch(WIDTH(global));
+        }
+    };
+};
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        login: state.login,
+        width: state.width
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(AddEvent);

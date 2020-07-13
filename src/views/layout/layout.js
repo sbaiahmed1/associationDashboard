@@ -4,6 +4,7 @@ import './layout.css'
 import logo from '../../assets/logo.png'
 import {PoweroffOutlined, SettingOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
+import Colors from "../../config/colors";
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -27,14 +28,17 @@ class LayoutPage extends Component {
                     }}
                     style={{
                         position: 'fixed',
-                        minHeight: '100%'
+                        minHeight: '100%',
+                        zIndex: 999
                     }}
                 >
                     <div className="logo">
-                        <Link to={'/'}>                        <img src={logo} alt={'logo'}/>
+                        <Link to={'/'}> <img src={logo} alt={'logo'}/>
                         </Link>
                     </div>
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={[this.props.selectedIndex]}>
+                    <Menu style={{
+                        zIndex: 999
+                    }} theme="dark" mode="inline" defaultSelectedKeys={[this.props.selectedIndex]}>
                         {this.props.content && this.props.content.map(route => {
                             return (
                                 <Menu.SubMenu title={route.label}>
@@ -49,11 +53,15 @@ class LayoutPage extends Component {
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Header theme="dark" className="site-layout-sub-header-background" style={{position:'fixed',minWidth:'100%',padding: 0}}>
+                    <Header theme="dark" className="site-layout-sub-header-background"
+                            style={{
+                                position: 'fixed', minWidth: '100%', padding: 0, zIndex: 999
+                            }}>
                         <Row
                             style={{float: 'right', margin: 20}}
                         >
                             <Button
+                                onClick={this.props.clickLogout}
                                 style={{marginLeft: 10}}
                                 type="outlined"
                                 icon={<PoweroffOutlined/>}
@@ -70,7 +78,7 @@ class LayoutPage extends Component {
                             {this.props.children}
                         </div>
                     </Content>
-                    <Footer style={{textAlign: 'center'}}>Ahmed Sbai 2020</Footer>
+                    <Footer style={{textAlign: 'center', marginLeft: 100}}>Ahmed Sbai 2020</Footer>
                 </Layout>
             </Layout>
         )

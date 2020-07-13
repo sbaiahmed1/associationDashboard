@@ -1,12 +1,13 @@
 import React, {Component} from "react";
-import userStyle from "./userStyle";
 import {baseUrl, Routes} from "../../config/constants";
 import {List} from "antd";
 import axios from 'axios'
-import Navbar from "../../components/navBar/navbar";
-import DrawerNav from "../../components/drawer/drawer";
 import UserContainer from "../../components/userContainer/userContainer";
 import UserModal from "../../components/userModal/userModal";
+import LayoutPage from "../layout/layout";
+import {loggedIn} from "../../redux/actions/login";
+import {WIDTH} from "../../redux/actions/width";
+import {connect} from "react-redux";
 
 const jwt = require('jsonwebtoken');
 
@@ -41,7 +42,7 @@ class Users extends Component {
             }
         );
     };
-    openUserModal = (name, lastName, role, username, email, type,imageName) => {
+    openUserModal = (name, lastName, role, username, email, type, imageName) => {
         this.setState({
             userModalContent: {
                 name,
@@ -73,54 +74,67 @@ class Users extends Component {
 
     render() {
         return (
-            <div style={userStyle.container}>
+            <LayoutPage content={Routes}>
                 <UserModal visible={this.state.modalVisible} content={this.state.userModalContent}/>
-                <Navbar onPressDrawer={() => this.onOpen()}/>
-                <DrawerNav
-                    visible={this.state.visible}
-                    onClose={() => this.onClose(false)}
-                    content={Routes}
-                />
-                <List
-                    style={{margin: 10}}
-                    grid={{
-                        gutter: 16,
-                        xs: 1,
-                        sm: 2,
-                        md: 4,
-                        lg: 4,
-                        xl: 4,
-                        xxl: 3,
-                    }}
-                    dataSource={this.state.users}
-                    renderItem={(item) => (
-                        <List.Item>
-                            <UserContainer
-                                image={item.imageName}
-                                onClick={(_) =>
-                                    this.openUserModal(
-                                        item.name,
-                                        item.lastName,
-                                        item.role,
-                                        item.username,
-                                        item.email,
-                                        item.type,
-                                    )
-                                }
-                                imageName={item.imageName}
-                                name={item.name}
-                                lastName={item.lastName}
-                                role={item.role}
-                                username={item.username}
-                                date={item.date}
-                                type={item.type}
-                            />
-                        </List.Item>
-                    )}
-                />
-            </div>
+                <div style={{marginLeft: this.props.width.width > 576 ? 200 : 0, marginTop: 50}}>
+                    <List
+                        style={{margin: 10}}
+                        grid={{
+                            gutter: 16,
+                            xs: 1,
+                            sm: 2,
+                            md: 4,
+                            lg: 4,
+                            xl: 4,
+                            xxl: 3,
+                        }}
+                        dataSource={this.state.users}
+                        renderItem={(item) => (
+                            <List.Item>
+                                <UserContainer
+                                    image={item.imageName}
+                                    onClick={(_) =>
+                                        this.openUserModal(
+                                            item.name,
+                                            item.lastName,
+                                            item.role,
+                                            item.username,
+                                            item.email,
+                                            item.type,
+                                        )
+                                    }
+                                    imageName={item.imageName}
+                                    name={item.name}
+                                    lastName={item.lastName}
+                                    role={item.role}
+                                    username={item.username}
+                                    date={item.date}
+                                    type={item.type}
+                                />
+                            </List.Item>
+                        )}
+                    />
+                </div>
+            </LayoutPage>
         );
     }
 }
 
-export default Users;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        isLogged: (global) => {
+            dispatch(loggedIn(global));
+        },
+        widthListener: (global) => {
+            dispatch(WIDTH(global));
+        }
+    };
+};
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        login: state.login,
+        width: state.width
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Users);

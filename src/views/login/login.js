@@ -52,6 +52,7 @@ class Login extends Component {
     };
 
     login = async () => {
+        let type
         let body = {
             email: this.state.email,
             password: this.state.password,
@@ -79,13 +80,22 @@ class Login extends Component {
                         userName: response.data.userData.username,
                     },
                 });
+                type = response.data.userData.type
                 this.storeToken(this.state.token);
                 this.setState({isLoading: false});
-                message.success('Successfully loggedIn, redirecting')
             })
-            .then(() => {
-                this.props.history.push("/dashboard");
-                this.props.isLogged(this.state.data);
+            .then((response) => {
+                console.log(type)
+                if (type === 'admin'){
+                    message.success('Successfully loggedIn, redirecting')
+                    this.props.history.push("/dashboard");
+                    this.props.isLogged(this.state.data);
+
+                }
+                else {
+                    message.error('You have no access here, please login with the app')
+                    localStorage.clear()
+                }
             })
             .catch((error) => {
                 console.log(error.response || error);

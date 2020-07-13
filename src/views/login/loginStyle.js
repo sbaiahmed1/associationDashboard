@@ -1,5 +1,4 @@
 import Colors from "../../config/colors";
-import backgroundImage from "../../assets/background.jpg";
 
 let loginStyle = {
     title: {

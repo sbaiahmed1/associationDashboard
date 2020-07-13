@@ -1,12 +1,18 @@
 import React, {Component, createRef} from "react";
-import {BackTop, Popover, Row} from "antd";
+import {BackTop, Row} from "antd";
 import {connect} from "react-redux";
-import {loggedIn} from "../../redux/actions/login";
+import {loggedIn,logout} from "../../redux/actions/login";
 import {Routes} from "../../config/constants";
 import LayoutPage from "../layout/layout";
 import StatsCard from "../../components/statsCard/statsCard";
 import {DualLine, Liquid} from "@ant-design/charts";
-import {BarChartOutlined, CalendarOutlined, UnorderedListOutlined, UserOutlined} from "@ant-design/icons";
+import {
+    BarChartOutlined,
+    CalendarOutlined,
+    MobileOutlined, NotificationOutlined,
+    UnorderedListOutlined,
+    UserOutlined
+} from "@ant-design/icons";
 import {WIDTH} from "../../redux/actions/width";
 
 const liquid = {
@@ -53,10 +59,6 @@ const data2 = [
 ];
 const config = {
     data: [data1, data2],
-    title: {
-        visible: true,
-        text: 'Mobile Users',
-    },
     xField: 'year',
     yField: ['IOS', 'Android'],
 };
@@ -152,9 +154,9 @@ class DashboardHome extends Component {
 
     render() {
         return (
-            <LayoutPage content={Routes}>
+            <LayoutPage clickLogout={()=>{logout(this.props)}} content={Routes}>
                 <div style={{marginLeft: this.props.width.width > 576 ? 200 : 0, marginTop: 50}}>
-                    <h1 style={{fontFamily:'Montserrat', fontWeight: 500}}> <BarChartOutlined /> Stats : </h1>
+                    <h1 style={{fontFamily: 'Montserrat', fontWeight: 500, marginTop: 10, marginBottom:10}}><BarChartOutlined/> Stats : </h1>
                     <Row style={{justifyContent: 'space-evenly'}}>
                         {
                             cardStats && cardStats.map(single => {
@@ -169,11 +171,11 @@ class DashboardHome extends Component {
                             })
                         }
                     </Row>
+                    <h1 style={{fontFamily: 'Montserrat', fontWeight: 500, marginTop: 10, marginBottom:10}}><MobileOutlined/> Mobile Users : </h1>
                     <DualLine {...config} chartRef={this.ref}/>
+                    <h1 style={{fontFamily: 'Montserrat', fontWeight: 500, marginTop: 10, marginBottom:10}}><NotificationOutlined/> Notification Stats : </h1>
                     <Row style={{justifyContent: 'space-evenly'}}>
-                        <Popover>
-                            <Liquid {...liquid}/>
-                        </Popover>
+                        <Liquid {...liquid}/>
                         <Liquid {...liquid1}/>
                     </Row>
                     <BackTop visibilityHeight={50}/>
@@ -188,7 +190,7 @@ const mapDispatchToProps = (dispatch) => {
         isLogged: (global) => {
             dispatch(loggedIn(global));
         },
-        widthListener: (global) =>{
+        widthListener: (global) => {
             dispatch(WIDTH(global));
         }
     };
@@ -197,7 +199,7 @@ const mapStateToProps = (state) => {
     console.log(state);
     return {
         login: state.login,
-        width : state.width
+        width: state.width
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardHome);

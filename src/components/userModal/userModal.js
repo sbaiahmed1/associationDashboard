@@ -4,7 +4,8 @@ import Paragraph from "antd/lib/typography/Paragraph";
 
 function UserModal(props) {
     // Similar to componentDidMount and componentDidUpdate:
-    return (<Modal
+    return (
+        <Modal
             closable={false}
             title="Edit"
             centered
